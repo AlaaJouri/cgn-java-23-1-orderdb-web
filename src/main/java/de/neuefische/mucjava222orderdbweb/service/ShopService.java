@@ -53,6 +53,7 @@ public class ShopService {
     public Product addProduct(Product product) {
 
         String id =UUID.randomUUID().toString();
-        return productRepository.add(product);
+        Product productWithId =new Product(product.name(), id);
+        return productRepository.add(productWithId);
     }
 }
