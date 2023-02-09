@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ShopService {
@@ -50,6 +51,8 @@ public class ShopService {
     }
 
     public Product addProduct(Product product) {
+
+        String id =UUID.randomUUID().toString();
         return productRepository.add(product);
     }
 }

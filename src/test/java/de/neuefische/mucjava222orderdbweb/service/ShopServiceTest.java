@@ -35,17 +35,18 @@ class ShopServiceTest {
         //GIVEN
         OrderRepository orderRepository = mock(OrderRepository.class);
         ProductRepository productRepository = mock(ProductRepository.class);
-
+        IdService idService=mock(IdService.class);
         ShopService shopService = new ShopService(orderRepository, productRepository);
+        when(idService.generateId()).thenReturn("123");
+        when(productRepository.add(new Product("Product2", "123")))
+                .thenReturn(new Product("Product2", "123"));
 
-        when(productRepository.add(new Product("Product2", "2")))
-                .thenReturn(new Product("Product2", "2"));
 
         //WHEN
         Product actual = shopService.addProduct(new Product("Product2", "2"));
 
         //THEN
-        verify(productRepository).add(new Product("Product2", "2"));
-        Assertions.assertEquals(new Product("Product2", "2"), actual);
+        verify(productRepository).add(new Product("Product2", "123"));
+        Assertions.assertEquals(new Product("Product2", "123"), actual);
     }
 }
